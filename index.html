@@ -870,6 +870,96 @@ input:focus-visible,
 }
 
 /* =========================================================
+   CHRISTMAS ROOM DETAILS
+   ========================================================= */
+
+.wall::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 7%;
+    height: 30%;
+    opacity: .8;
+    background:
+        radial-gradient(circle at 12% 28%, rgba(210,165,90,.16) 0 2px, transparent 3px),
+        radial-gradient(circle at 28% 42%, rgba(177,54,48,.15) 0 2px, transparent 3px),
+        radial-gradient(circle at 47% 25%, rgba(210,165,90,.14) 0 2px, transparent 3px),
+        radial-gradient(circle at 66% 48%, rgba(177,54,48,.13) 0 2px, transparent 3px),
+        radial-gradient(circle at 84% 30%, rgba(210,165,90,.14) 0 2px, transparent 3px);
+    pointer-events: none;
+}
+
+.christmas-garland {
+    position: absolute;
+    left: 7%;
+    right: 7%;
+    top: 8%;
+    height: 70px;
+    z-index: 7;
+    pointer-events: none;
+    border-top: 2px solid rgba(30,57,42,.9);
+    border-radius: 50%;
+    transform: rotate(-1deg);
+}
+
+.christmas-garland span {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #d7b067;
+    box-shadow: 0 0 12px rgba(215,176,103,.7);
+    animation: garlandBlink 2.8s ease-in-out infinite alternate;
+}
+.christmas-garland span:nth-child(1){left:4%;top:18%}.christmas-garland span:nth-child(2){left:16%;top:33%;animation-delay:-.6s}.christmas-garland span:nth-child(3){left:28%;top:43%;animation-delay:-1.2s}.christmas-garland span:nth-child(4){left:40%;top:49%;animation-delay:-.3s}.christmas-garland span:nth-child(5){left:52%;top:51%;animation-delay:-1.7s}.christmas-garland span:nth-child(6){left:64%;top:46%;animation-delay:-.8s}.christmas-garland span:nth-child(7){left:76%;top:35%;animation-delay:-2s}.christmas-garland span:nth-child(8){left:88%;top:21%;animation-delay:-1s}.christmas-garland span:nth-child(9){left:96%;top:12%;animation-delay:-1.5s}
+
+@keyframes garlandBlink { from { opacity:.3; transform:scale(.75); } to { opacity:1; transform:scale(1.15); } }
+
+.stocking {
+    position:absolute;
+    top:13%;
+    z-index:8;
+    width:46px;
+    height:62px;
+    display:grid;
+    place-items:center;
+    color:rgba(215,176,103,.75);
+    font-size:22px;
+    border-bottom:3px solid rgba(91,36,35,.8);
+    filter:drop-shadow(0 8px 9px rgba(0,0,0,.45));
+    pointer-events:none;
+}
+.stocking-one{right:30%;transform:rotate(4deg)}
+.stocking-two{right:23%;transform:rotate(-5deg);color:rgba(190,54,48,.72)}
+
+.cup { cursor:pointer; transition:transform .5s var(--ease-cinematic), filter .4s ease; }
+.cup:hover { transform:translateY(-4px) rotate(-2deg); filter:brightness(1.08); }
+.cup.steaming { filter:brightness(1.16); }
+
+.phone-home {
+    position:absolute; bottom:4px; left:50%; transform:translateX(-50%);
+    color:rgba(220,210,194,.35); font:5px Arial,sans-serif;
+}
+.incoming-icon { font-size:18px; margin-bottom:7px; animation:ringIcon 1s ease-in-out infinite; }
+.call-actions { display:flex; justify-content:space-around; gap:8px; margin-top:12px; color:#bfae91; font-size:5px; }
+@keyframes ringIcon { 0%,100%{transform:rotate(-12deg)} 50%{transform:rotate(12deg)} }
+
+.modal {
+    width:min(90vw, 470px);
+    padding:32px 34px 27px;
+    border-radius:2px;
+}
+.modal-message {
+    max-width:34ch;
+    margin:0 auto;
+    font-size:clamp(15px, 2vw, 18px);
+    line-height:1.85;
+    letter-spacing:.015em;
+}
+.modal-kicker { margin-bottom:18px; }
+
+/* =========================================================
    FILM GRAIN / VIGNETTE
    ========================================================= */
 
@@ -964,29 +1054,6 @@ input:focus-visible,
         height: 36px;
         font-size: 20px;
     }
-}
-
-/* =========================================================
-   INTERACTION HINT
-   ========================================================= */
-
-.discovery-hint {
-    position: fixed;
-    left: 50%;
-    bottom: 18%;
-    z-index: 100;
-    transform: translateX(-50%);
-    color: rgba(229,216,193,.55);
-    font-size: 12px;
-    font-style: italic;
-    letter-spacing: .04em;
-    transition: opacity 1.5s ease;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.discovery-hint.hidden {
-    opacity: 0;
 }
 
 /* =========================================================
@@ -1671,6 +1738,10 @@ input:focus-visible,
 
             <div class="wall"></div>
 
+            <div class="christmas-garland" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="stocking stocking-one" aria-hidden="true">🎄</div>
+            <div class="stocking stocking-two" aria-hidden="true">★</div>
+
             <!-- WINDOW -->
             <div
                 id="window"
@@ -1761,14 +1832,17 @@ input:focus-visible,
                     <div class="phone-status">23:47</div>
 
                     <div class="phone-call-state">
+                        <div class="incoming-icon">☎</div>
                         INCOMING CALL
                         <strong>UNKNOWN</strong>
+                        <div class="call-actions"><span>DECLINE</span><span>ANSWER</span></div>
                     </div>
+                    <div class="phone-home">●</div>
                 </div>
             </div>
 
             <!-- CUP -->
-            <div class="cup" aria-hidden="true">
+            <div id="cup" class="cup interactive" role="button" tabindex="0" aria-label="Touch the Christmas drink">
                 <div class="steam"></div>
                 <div class="steam two"></div>
             </div>
@@ -1800,10 +1874,6 @@ input:focus-visible,
     <div class="scene-label">DECEMBER 24 · 23:47</div>
 
     <div id="lyrics" class="lyrics" aria-live="polite"></div>
-
-    <div id="discoveryHint" class="discovery-hint">
-        There are things worth looking at.
-    </div>
 
     <!-- ===================================================
          CUSTOM PLAYER
@@ -1954,10 +2024,10 @@ input:focus-visible,
 const CONFIG = {
 
     messages: {
-        tree: "«The tree.\n\nSome things only look beautiful from a distance.»",
+        tree: "The tree is glowing softly.\n\nFor a moment, the whole room feels warmer than it really is." ,
         window: "«Outside.\n\nCold air. Quiet streets. Lights in windows that aren't yours.»",
-        gift: "«One small thing.\n\n[A MEMORY / MESSAGE GOES HERE]»",
-        clock: "«December 24\n\n23:12 — [MEMORY]\n23:31 — [MEMORY]\n23:47 — [MEMORY]»",
+        gift: "A small gift, left unopened.\n\nMaybe it is better to wonder what is inside than to find out." ,
+        clock: "DECEMBER 24\n\n23:12 — The room is still awake.\n23:31 — The snow gets heavier.\n23:47 — The phone rings." ,
         phoneIncoming: "INCOMING CALL\n\nUnknown",
         phoneDeclined: "«Good.»",
         phoneAnswered: "«Some calls are better left unanswered.»"
@@ -2049,10 +2119,9 @@ const tree = document.getElementById("tree");
 const gift = document.getElementById("gift");
 const phone = document.getElementById("phone");
 const clock = document.getElementById("clock");
+const cup = document.getElementById("cup");
 
 const lyricsContainer = document.getElementById("lyrics");
-const discoveryHint = document.getElementById("discoveryHint");
-
 const playButton = document.getElementById("playButton");
 const progressTrack = document.getElementById("progressTrack");
 const progressFill = document.getElementById("progressFill");
@@ -2247,6 +2316,7 @@ function closeModal() {
 function triggerPhoneCall() {
     phoneTriggered = true;
     phone.classList.add("calling");
+    phone.setAttribute("aria-label", "Answer the incoming call");
 }
 
 function triggerEnding() {
@@ -2328,10 +2398,18 @@ clock.addEventListener("click", () => {
 phone.addEventListener("click", () => {
     if (phone.classList.contains("calling")) {
         phone.classList.remove("calling");
+        phone.setAttribute("aria-label", "Check the phone");
         openModal("PHONE CALL", CONFIG.messages.phoneAnswered);
     } else {
-        openModal("PHONE", "23:47 — No new notifications.");
+        openModal("PHONE", "23:47\n\nNo new notifications.\nThe screen goes dark again.");
     }
+});
+
+// Cup interaction
+cup.addEventListener("click", () => {
+    cup.classList.add("steaming");
+    openModal("CHRISTMAS EVE", "The drink is still warm.\n\nOutside, snow keeps falling. Inside, the room refuses to feel completely cold.");
+    setTimeout(() => cup.classList.remove("steaming"), 1200);
 });
 
 modalClose.addEventListener("click", () => {
@@ -2353,6 +2431,16 @@ modalBackdrop.addEventListener("click", (e) => {
 });
 
 fullscreenButton.addEventListener("click", toggleFullscreen);
+
+// Make every interactive room object respond to keyboard activation as well as touch/click.
+document.querySelectorAll(".interactive").forEach((item) => {
+    item.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            item.click();
+        }
+    });
+});
 
 function toggleFullscreen() {
     if (!document.fullscreenElement) {
@@ -2436,7 +2524,9 @@ function replayExperience() {
     windowFocused = false;
 
     phone.classList.remove("calling");
+    phone.setAttribute("aria-label", "Check the phone");
     gift.classList.remove("open");
+    cup.classList.remove("steaming");
 
     scene.classList.remove("window-focus", "phase-2", "phase-3", "phase-4", "phase-5");
     scene.classList.add("phase-1");
