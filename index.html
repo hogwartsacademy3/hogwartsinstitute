@@ -1326,30 +1326,29 @@ input:focus-visible,
    PROGRESSION STATES
    ========================================================= */
 
-/* Dibuat sedikit lebih terang berdasarkan instruksi */
 .scene.phase-1 {
-    --scene-brightness: .85;
+    --scene-brightness: .72;
     --tree-light-opacity: .42;
     --window-glow: .28;
 }
 
 .scene.phase-2 {
-    --scene-brightness: .95;
+    --scene-brightness: .82;
     --tree-light-opacity: .72;
 }
 
 .scene.phase-3 {
-    --scene-brightness: 1.15;
+    --scene-brightness: 1;
     --tree-light-opacity: 1;
 }
 
 .scene.phase-4 {
-    --scene-brightness: .85;
+    --scene-brightness: .72;
     --tree-light-opacity: .38;
 }
 
 .scene.phase-5 {
-    --scene-brightness: .45;
+    --scene-brightness: .35;
     --tree-light-opacity: 0;
 }
 
@@ -1432,12 +1431,10 @@ input:focus-visible,
         grid-template-columns: 40px 1fr;
     }
 
-    /* Memastikan tombol full screen dan restart tetap muncul di ponsel */
     .secondary-controls {
-        display: flex;
+        display: none;
     }
 
-    /* Sembunyikan hanya kontrol bar volume di layar sempit */
     .volume-wrap {
         display: none;
     }
@@ -1816,14 +1813,6 @@ input:focus-visible,
                     aria-label="Restart song"
                     title="Restart"
                 >↺</button>
-                
-                <button
-                    id="fullscreenButton"
-                    class="small-button"
-                    type="button"
-                    aria-label="Toggle Fullscreen"
-                    title="Fullscreen"
-                >⛶</button>
 
                 <div class="volume-wrap">
                     <button
@@ -1927,7 +1916,6 @@ const CONFIG = {
     // ======================================================
     // AUDIO
     // ======================================================
-    // Pastikan ini cocok dengan file audio lokal Anda.
     audioFile: "./lagu.mp3",
 
     // ======================================================
@@ -1959,62 +1947,27 @@ const CONFIG = {
 
     // ======================================================
     // LYRICS
-    // Terisi dengan lirik yang Anda minta lengkap dengan 
-    // perkiraan timestamp dari lagu Bleachers.
+    // EDIT YOUR LYRICS HERE
+    //
+    // time = seconds from the beginning of the song.
+    // Replace the placeholder text with your own lyrics.
     // ======================================================
 
     lyrics: [
-        { time: 0, text: "" },
-        { time: 14, text: "To the tempo of your uptight" },
-        { time: 18, text: "Is the flicker of a street light" },
-        { time: 21, text: "You know this moment, don't ya?" },
-        { time: 24, text: "And time is strangely calm now" },
-        { time: 27, text: "'Cause everybody's gone, it's" },
-        { time: 30, text: "Just you and your anger" },
-        { time: 33, text: "Oh, golden boy, don't act like you were kind" },
-        { time: 37, text: "You were mine but you were awful every time" },
-        { time: 40, text: "So don't tell them what you told me" },
-        { time: 43, text: "Don't hold me like you know me" },
-        { time: 45, text: "I would rather burn forever" },
-        { time: 48, text: "But you should know that I died slow" },
-        { time: 54, text: "Running through the halls of your haunted home" },
-        { time: 61, text: "And the toughest part is that we both know" },
-        { time: 65, text: "What happened to you" },
-        { time: 68, text: "Why you're out on your own" },
-        { time: 71, text: "Merry Christmas, please don't call" },
-        { time: 82, text: "You really left me on the line, kid" },
-        { time: 85, text: "Holding all your baggage" },
-        { time: 89, text: "You know I'm not your father" },
-        { time: 92, text: "Who says welcome to your uptight" },
-        { time: 95, text: "While it flickers like a street light" },
-        { time: 98, text: "He flickers through your damage" },
-        { time: 101, text: "Oh, golden boy, you shined a light on your home" },
-        { time: 105, text: "And at your best you were magic, we were sold" },
-        { time: 108, text: "But don't tell 'em what you told me" },
-        { time: 111, text: "Don't even tell 'em that you know me" },
-        { time: 113, text: "I would rather burn forever" },
-        { time: 116, text: "But you should know that I died slow" },
-        { time: 122, text: "Running through the halls of your haunted home" },
-        { time: 129, text: "And the toughest part is that we both know" },
-        { time: 133, text: "What happened to you" },
-        { time: 136, text: "Why you're out on your own" },
-        { time: 139, text: "Merry Christmas, please don't call" },
-        { time: 144, text: "Just one ticket out of your heavy gaze" },
-        { time: 147, text: "I want one ticket off of your carousel" },
-        { time: 151, text: "I want one ticket out of your heavy gaze" },
-        { time: 154, text: "I want one ticket off of your carousel" },
-        { time: 158, text: "Only, you should know that I died slow" },
-        { time: 164, text: "Running through the halls of your haunted home" },
-        { time: 171, text: "And the toughest part is that we both know" },
-        { time: 174, text: "What happened to you" },
-        { time: 178, text: "Why you're out on your own" },
-        { time: 181, text: "Merry Christmas, please don't call" },
-        { time: 186, text: "Merry Christmas, I'm not yours at all" },
-        { time: 190, text: "Merry Christmas, please don't call me" },
-        { time: 195, text: "Please don't call me" },
-        { time: 198, text: "Please don't call me" },
-        { time: 201, text: "Please don't call me" },
-        { time: 210, text: "" }
+        { time: 0,  text: "[INTRO]" },
+        { time: 12, text: "[LYRIC LINE 1]" },
+        { time: 25, text: "[LYRIC LINE 2]" },
+        { time: 40, text: "[LYRIC LINE 3]" },
+        { time: 56, text: "[LYRIC LINE 4]" },
+        { time: 72, text: "[LYRIC LINE 5]" },
+        { time: 90, text: "[LYRIC LINE 6]" },
+        { time: 108, text: "[LYRIC LINE 7]" },
+        { time: 126, text: "[LYRIC LINE 8]" },
+        { time: 144, text: "[LYRIC LINE 9]" },
+        { time: 162, text: "[LYRIC LINE 10]" },
+        { time: 180, text: "[LYRIC LINE 11]" },
+        { time: 198, text: "[LYRIC LINE 12]" },
+        { time: 216, text: "[OUTRO]" }
     ],
 
     // ======================================================
@@ -2052,7 +2005,6 @@ const lyricsContainer = document.getElementById("lyrics");
 
 const playButton = document.getElementById("playButton");
 const restartButton = document.getElementById("restartButton");
-const fullscreenButton = document.getElementById("fullscreenButton");
 const muteButton = document.getElementById("muteButton");
 const volume = document.getElementById("volume");
 
@@ -2396,25 +2348,6 @@ function seekFromKeyboard(event) {
         audio.currentTime = audio.duration;
     }
 }
-
-
-/* ==========================================================
-   FULLSCREEN HANDLER
-   ========================================================== */
-
-function toggleFullscreen() {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.warn(`Error attempting to enable fullscreen mode: ${err.message}`);
-        });
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    }
-}
-
-fullscreenButton.addEventListener("click", toggleFullscreen);
 
 
 /* ==========================================================
@@ -3229,7 +3162,7 @@ function initialize() {
     /*
      * Make sure the required local audio path is explicit.
      */
-    // audio.setAttribute("src", CONFIG.audioFile); // dinonaktifkan agar tidak merusak path asli di HTML
+    audio.setAttribute("src", CONFIG.audioFile);
 
     createSnow();
 
