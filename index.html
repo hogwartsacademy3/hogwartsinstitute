@@ -9,8 +9,7 @@
 
 <style>
 /* =========================================================
-   COLORS
-   Edit these variables to change the entire visual palette.
+   COLORS & VARIABLES
    ========================================================= */
 :root {
     --black: #070605;
@@ -177,7 +176,6 @@ input:focus-visible,
     transition: filter 2s ease;
 }
 
-/* Subtle camera layer */
 .camera {
     position: absolute;
     inset: -2%;
@@ -1611,10 +1609,6 @@ input:focus-visible,
     }
 }
 
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -1640,9 +1634,11 @@ input:focus-visible,
 
 <!-- =======================================================
      AUDIO
-     DO NOT RENAME lagu.mp3
      ======================================================= -->
-<audio id="audio" src="./Bleachers - Merry Christmas, Please Don't Call Official Music Video.mp3" preload="metadata"></audio>
+<audio id="audio" preload="metadata">
+    <source src="./Bleachers - Merry Christmas, Please Don't Call Official Music Video.mp3" type="audio/mpeg">
+    <source src="./lagu.mp3" type="audio/mpeg">
+</audio>
 
 <!-- =======================================================
      OPENING
@@ -1948,132 +1944,95 @@ input:focus-visible,
 <div class="grain" aria-hidden="true"></div>
 <div class="vignette" aria-hidden="true"></div>
 
-
 <script>
 "use strict";
 
 /* ==========================================================
-   CONFIGURATION
-   Easy-to-edit settings live here.
+   CONFIGURATION & SYNCHRONIZED LYRICS
    ========================================================== */
 
 const CONFIG = {
 
-    // ======================================================
-    // AUDIO
-    // ======================================================
-    audioFile: "./lagu.mp3",
-
-    // ======================================================
-    // HIDDEN MESSAGES / INTERACTIVE TEXT
-    // EDIT THESE TEXTS
-    // ======================================================
-
     messages: {
         tree: "«The tree.\n\nSome things only look beautiful from a distance.»",
-
-        window:
-            "«Outside.\n\nCold air. Quiet streets. Lights in windows that aren't yours.»",
-
-        gift:
-            "«One small thing.\n\n[A MEMORY / MESSAGE GOES HERE]»",
-
-        clock:
-            "«December 24\n\n23:12 — [MEMORY]\n23:31 — [MEMORY]\n23:47 — [MEMORY]»",
-
-        phoneIncoming:
-            "INCOMING CALL\n\nUnknown",
-
-        phoneDeclined:
-            "«Good.»",
-
-        phoneAnswered:
-            "«Some calls are better left unanswered.»"
+        window: "«Outside.\n\nCold air. Quiet streets. Lights in windows that aren't yours.»",
+        gift: "«One small thing.\n\n[A MEMORY / MESSAGE GOES HERE]»",
+        clock: "«December 24\n\n23:12 — [MEMORY]\n23:31 — [MEMORY]\n23:47 — [MEMORY]»",
+        phoneIncoming: "INCOMING CALL\n\nUnknown",
+        phoneDeclined: "«Good.»",
+        phoneAnswered: "«Some calls are better left unanswered.»"
     },
 
-    // ======================================================
-    // LYRICS
-    // EDIT YOUR LYRICS HERE
-    //
-    // time = seconds from the beginning of the song.
-    // Replace the placeholder text with your own lyrics.
-    // Paste your supplied lyric text into the `text` fields below.
-    // The timings are already laid out to follow the 199.48s audio file.
-    // ======================================================
-
     lyrics: [
-        { time: 0.0,   text: "[INTRO]" },
+        // Verse 1
+        { time: 4.9,   text: "To the tempo of your uptight" },
+        { time: 7.1,   text: "Is the flicker of a street light" },
+        { time: 10.5,  text: "You know this moment, don't ya?" },
+        { time: 13.1,  text: "And time is strangely calm now" },
+        { time: 15.9,  text: "'Cause everybody's gone, it's" },
+        { time: 18.8,  text: "Just you and your anger" },
 
-        { time: 5.5,   text: "[VERSE 1 · 01]" },
-        { time: 9.4,   text: "[VERSE 1 · 02]" },
-        { time: 13.2,  text: "[VERSE 1 · 03]" },
-        { time: 17.1,  text: "[VERSE 1 · 04]" },
-        { time: 20.8,  text: "[VERSE 1 · 05]" },
-        { time: 24.7,  text: "[VERSE 1 · 06]" },
+        // Pre-Chorus
+        { time: 22.0,  text: "Oh, golden boy, don't act like you were kind" },
+        { time: 27.5,  text: "You were mine but you were awful every time" },
+        { time: 30.8,  text: "So don't tell them what you told me" },
+        { time: 33.8,  text: "Don't hold me like you know me" },
+        { time: 35.8,  text: "I would rather burn forever" },
 
-        { time: 29.0,  text: "[PRE-CHORUS · 01]" },
-        { time: 33.0,  text: "[PRE-CHORUS · 02]" },
-        { time: 37.0,  text: "[PRE-CHORUS · 03]" },
-        { time: 40.8,  text: "[PRE-CHORUS · 04]" },
-        { time: 44.2,  text: "[PRE-CHORUS · 05]" },
+        // Chorus
+        { time: 39.3,  text: "But you should know that I died slow" },
+        { time: 43.5,  text: "Running through the halls of your haunted home" },
+        { time: 47.8,  text: "And the toughest part is that we both know" },
+        { time: 51.2,  text: "What happened to you" },
+        { time: 54.0,  text: "Why you're out on your own" },
+        { time: 56.6,  text: "Merry Christmas, please don't call" },
 
-        { time: 48.2,  text: "[CHORUS · 01]" },
-        { time: 52.0,  text: "[CHORUS · 02]" },
-        { time: 55.9,  text: "[CHORUS · 03]" },
-        { time: 59.7,  text: "[CHORUS · 04]" },
-        { time: 63.5,  text: "[CHORUS · 05]" },
-        { time: 67.5,  text: "[CHORUS · 06]" },
+        // Verse 2
+        { time: 64.5,  text: "You really left me on the line, kid" },
+        { time: 67.5,  text: "Holding all your baggage" },
+        { time: 70.2,  text: "You know I'm not your father" },
+        { time: 73.4,  text: "Who says welcome to your uptight" },
+        { time: 76.5,  text: "While it flickers like a street light" },
+        { time: 78.7,  text: "He flickers through your damage" },
 
-        { time: 73.0,  text: "[VERSE 2 · 01]" },
-        { time: 77.0,  text: "[VERSE 2 · 02]" },
-        { time: 81.0,  text: "[VERSE 2 · 03]" },
-        { time: 85.0,  text: "[VERSE 2 · 04]" },
-        { time: 89.0,  text: "[VERSE 2 · 05]" },
-        { time: 93.0,  text: "[VERSE 2 · 06]" },
+        // Pre-Chorus
+        { time: 81.8,  text: "Oh, golden boy, you shined a light on your home" },
+        { time: 87.0,  text: "And at your best you were magic, we were sold" },
+        { time: 91.0,  text: "But don't tell 'em what you told me" },
+        { time: 92.9,  text: "Don't even tell 'em that you know me" },
+        { time: 94.9,  text: "I would rather burn forever" },
 
-        { time: 97.0,  text: "[PRE-CHORUS · 01]" },
-        { time: 101.0, text: "[PRE-CHORUS · 02]" },
-        { time: 105.0, text: "[PRE-CHORUS · 03]" },
-        { time: 109.0, text: "[PRE-CHORUS · 04]" },
-        { time: 113.0, text: "[PRE-CHORUS · 05]" },
+        // Chorus
+        { time: 99.3,  text: "But you should know that I died slow" },
+        { time: 104.0, text: "Running through the halls of your haunted home" },
+        { time: 107.9, text: "And the toughest part is that we both know" },
+        { time: 111.9, text: "What happened to you" },
+        { time: 114.1, text: "Why you're out on your own" },
+        { time: 117.0, text: "Merry Christmas, please don't call" },
 
-        { time: 117.0, text: "[CHORUS · 01]" },
-        { time: 121.0, text: "[CHORUS · 02]" },
-        { time: 125.0, text: "[CHORUS · 03]" },
-        { time: 129.0, text: "[CHORUS · 04]" },
-        { time: 133.0, text: "[CHORUS · 05]" },
-        { time: 137.0, text: "[CHORUS · 06]" },
+        // Bridge
+        { time: 123.4, text: "Just one ticket out of your heavy gaze" },
+        { time: 128.5, text: "I want one ticket off of your carousel" },
+        { time: 133.4, text: "I want one ticket out of your heavy gaze" },
+        { time: 136.8, text: "I want one ticket off of your carousel" },
 
-        { time: 146.5, text: "[BRIDGE · 01]" },
-        { time: 151.0, text: "[BRIDGE · 02]" },
-        { time: 155.5, text: "[BRIDGE · 03]" },
-        { time: 160.0, text: "[BRIDGE · 04]" },
-
-        { time: 164.0, text: "[FINAL CHORUS · 01]" },
-        { time: 168.0, text: "[FINAL CHORUS · 02]" },
-        { time: 172.0, text: "[FINAL CHORUS · 03]" },
-        { time: 176.0, text: "[FINAL CHORUS · 04]" },
-        { time: 180.0, text: "[FINAL CHORUS · 05]" },
-        { time: 183.8, text: "[FINAL CHORUS · 06]" },
-        { time: 187.0, text: "[FINAL CHORUS · 07]" },
-        { time: 190.0, text: "[FINAL CHORUS · 08]" },
-        { time: 193.0, text: "[FINAL CHORUS · 09]" },
-        { time: 196.0, text: "[OUTRO]" }
-    ],
-
-    // ======================================================
-    // EVENT BASED ON SONG PROGRESS
-    //
-    // These are percentages, NOT fixed song durations.
-    // ======================================================
-
-    phoneTriggerProgress: 0.70,
-    endingTriggerProgress: 0.98
+        // Chorus & Outro
+        { time: 141.4, text: "Only, you should know that I died slow" },
+        { time: 146.5, text: "Running through the halls of your haunted home" },
+        { time: 151.1, text: "And the toughest part is that we both know" },
+        { time: 154.8, text: "What happened to you" },
+        { time: 156.8, text: "Why you're out on your own" },
+        { time: 159.8, text: "Merry Christmas, please don't call" },
+        { time: 164.1, text: "Merry Christmas, I'm not yours at all" },
+        { time: 168.3, text: "Merry Christmas, please don't call me" },
+        { time: 174.5, text: "Please don't call me" },
+        { time: 179.0, text: "Please don't call me" },
+        { time: 183.1, text: "Please don't call me" }
+    ]
 };
 
-
 /* ==========================================================
-   DOM
+   STATE & ELEMENTS
    ========================================================== */
 
 const audio = document.getElementById("audio");
@@ -2083,46 +2042,38 @@ const openButton = document.getElementById("openButton");
 
 const experience = document.getElementById("experience");
 const scene = document.getElementById("scene");
+const camera = document.getElementById("camera");
 
+const windowEl = document.getElementById("window");
 const tree = document.getElementById("tree");
-const windowObject = document.getElementById("window");
 const gift = document.getElementById("gift");
 const phone = document.getElementById("phone");
 const clock = document.getElementById("clock");
 
-const snow = document.getElementById("snow");
-
 const lyricsContainer = document.getElementById("lyrics");
+const discoveryHint = document.getElementById("discoveryHint");
 
 const playButton = document.getElementById("playButton");
-const restartButton = document.getElementById("restartButton");
-const muteButton = document.getElementById("muteButton");
-const volume = document.getElementById("volume");
-
 const progressTrack = document.getElementById("progressTrack");
 const progressFill = document.getElementById("progressFill");
 const progressKnob = document.getElementById("progressKnob");
+const currentTimeEl = document.getElementById("currentTime");
+const durationEl = document.getElementById("duration");
 
-const currentTimeElement = document.getElementById("currentTime");
-const durationElement = document.getElementById("duration");
-
-const discoveryHint = document.getElementById("discoveryHint");
+const restartButton = document.getElementById("restartButton");
+const muteButton = document.getElementById("muteButton");
+const volumeInput = document.getElementById("volume");
 
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalKicker = document.getElementById("modalKicker");
 const modalMessage = document.getElementById("modalMessage");
-const modalActions = document.getElementById("modalActions");
 const modalClose = document.getElementById("modalClose");
 
 const ending = document.getElementById("ending");
 const endingPhone = document.getElementById("endingPhone");
 const endingCopy = document.getElementById("endingCopy");
 const replayButton = document.getElementById("replayButton");
-
-
-/* ==========================================================
-   STATE
-   ========================================================== */
+const fullscreenButton = document.getElementById("fullscreenButton");
 
 let currentLyricIndex = -1;
 let phoneTriggered = false;
@@ -2130,1067 +2081,354 @@ let endingTriggered = false;
 let endingRunning = false;
 let giftOpened = false;
 let windowFocused = false;
-let lastFrame = 0;
 
-let activeModalCloseAction = null;
-
-const prefersReducedMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+let mouseX = 0;
+let mouseY = 0;
+let targetCameraX = 0;
+let targetCameraY = 0;
 
 /* ==========================================================
-   HELPERS
+   AUDIO PLAYER & TIME MANAGEMENT
    ========================================================== */
 
-function formatTime(seconds) {
-    if (!Number.isFinite(seconds) || seconds < 0) {
-        return "00:00";
+function formatTime(sec) {
+    if (isNaN(sec) || sec < 0) return "00:00";
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+}
+
+function updateProgress() {
+    const cur = audio.currentTime || 0;
+    const dur = audio.duration || 1;
+    const pct = (cur / dur) * 100;
+
+    progressFill.style.width = `${pct}%`;
+    progressKnob.style.left = `${pct}%`;
+    progressTrack.setAttribute("aria-valuenow", Math.round(pct));
+
+    currentTimeEl.textContent = formatTime(cur);
+    if (audio.duration) {
+        durationEl.textContent = formatTime(audio.duration);
     }
 
-    const minutes = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
+    updateLyrics(cur);
+    updatePhases(cur);
 
-    return (
-        String(minutes).padStart(2, "0") +
-        ":" +
-        String(secs).padStart(2, "0")
-    );
-}
-
-
-function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
-}
-
-
-/* ==========================================================
-   SNOW
-   Lightweight snow particles.
-   ========================================================== */
-
-function createSnow() {
-
-    const count = window.innerWidth < 600 ? 28 : 48;
-
-    snow.innerHTML = "";
-
-    for (let i = 0; i < count; i++) {
-
-        const flake = document.createElement("span");
-
-        flake.className = "snowflake";
-
-        const size = Math.random() * 2 + 1;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 12 + 10;
-        const delay = Math.random() * -20;
-        const drift = (Math.random() * 100 - 50) + "px";
-
-        flake.style.left = left + "%";
-        flake.style.width = size + "px";
-        flake.style.height = size + "px";
-        flake.style.opacity = String(Math.random() * .7 + .2);
-        flake.style.animationDuration = duration + "s";
-        flake.style.animationDelay = delay + "s";
-        flake.style.setProperty("--drift", drift);
-
-        snow.appendChild(flake);
+    if (cur >= 158 && !phoneTriggered && !endingTriggered) {
+        triggerPhoneCall();
     }
 }
 
-
-/* ==========================================================
-   LYRICS
-   EDIT YOUR LYRICS IN CONFIG.lyrics ABOVE.
-   ========================================================== */
-
-function buildLyrics() {
-
-    lyricsContainer.innerHTML = "";
-
-    CONFIG.lyrics.forEach((lyric, index) => {
-
-        const line = document.createElement("div");
-
-        line.className = "lyric-line";
-        line.dataset.index = String(index);
-        line.textContent = lyric.text;
-
-        lyricsContainer.appendChild(line);
+function playAudio() {
+    audio.play().then(() => {
+        playButton.textContent = "❚❚";
+        playButton.setAttribute("aria-label", "Pause");
+    }).catch(err => {
+        console.warn("Audio autoplay restricted:", err);
     });
 }
 
+function pauseAudio() {
+    audio.pause();
+    playButton.textContent = "▶";
+    playButton.setAttribute("aria-label", "Play");
+}
 
-function updateLyrics(time) {
-
-    if (!CONFIG.lyrics.length) {
-        return;
+function togglePlay() {
+    if (audio.paused) {
+        playAudio();
+    } else {
+        pauseAudio();
     }
+}
 
-    let newIndex = -1;
+function seek(e) {
+    const rect = progressTrack.getBoundingClientRect();
+    const pos = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (audio.duration) {
+        audio.currentTime = pos * audio.duration;
+        updateProgress();
+    }
+}
 
+function toggleMute() {
+    audio.muted = !audio.muted;
+    muteButton.textContent = audio.muted ? "🔇" : "◖";
+}
+
+function updateVolume() {
+    audio.volume = parseFloat(volumeInput.value);
+    audio.muted = (audio.volume === 0);
+    muteButton.textContent = audio.muted ? "🔇" : "◖";
+}
+
+/* ==========================================================
+   LYRICS ENGINE
+   ========================================================== */
+
+function buildLyrics() {
+    lyricsContainer.innerHTML = "";
+    CONFIG.lyrics.forEach((item, index) => {
+        const el = document.createElement("div");
+        el.className = "lyric-line";
+        el.dataset.index = index;
+        el.textContent = item.text;
+        lyricsContainer.appendChild(el);
+    });
+}
+
+function updateLyrics(currentTime) {
+    let index = -1;
     for (let i = 0; i < CONFIG.lyrics.length; i++) {
-
-        if (time >= CONFIG.lyrics[i].time) {
-            newIndex = i;
+        if (currentTime >= CONFIG.lyrics[i].time) {
+            index = i;
         } else {
             break;
         }
     }
 
-    if (newIndex === currentLyricIndex) {
-        return;
-    }
-
-    currentLyricIndex = newIndex;
-
-    const lines = lyricsContainer.querySelectorAll(".lyric-line");
-
-    lines.forEach((line, index) => {
-
-        line.classList.remove("active", "past");
-
-        if (index === newIndex) {
-            line.classList.add("active");
-        }
-
-        if (index < newIndex) {
-            line.classList.add("past");
-        }
-    });
-}
-
-
-function resetLyrics() {
-
-    currentLyricIndex = -1;
-
-    const lines = lyricsContainer.querySelectorAll(".lyric-line");
-
-    lines.forEach(line => {
-        line.classList.remove("active", "past");
-    });
-}
-
-
-/* ==========================================================
-   AUDIO
-   ========================================================== */
-
-audio.volume = Number(volume.value);
-
-
-function updatePlayer() {
-
-    const duration = audio.duration;
-
-    currentTimeElement.textContent = formatTime(audio.currentTime);
-
-    if (Number.isFinite(duration)) {
-        durationElement.textContent = formatTime(duration);
-    } else {
-        durationElement.textContent = "00:00";
-    }
-
-    let progress = 0;
-
-    if (Number.isFinite(duration) && duration > 0) {
-        progress = (audio.currentTime / duration) * 100;
-    }
-
-    progress = clamp(progress, 0, 100);
-
-    progressFill.style.width = progress + "%";
-    progressKnob.style.left = progress + "%";
-
-    progressTrack.setAttribute(
-        "aria-valuenow",
-        String(Math.round(progress))
-    );
-
-    updateLyrics(audio.currentTime);
-}
-
-
-function updatePlayButton() {
-
-    if (audio.paused) {
-        playButton.textContent = "▶";
-        playButton.setAttribute("aria-label", "Play");
-        playButton.title = "Play";
-    } else {
-        playButton.textContent = "Ⅱ";
-        playButton.setAttribute("aria-label", "Pause");
-        playButton.title = "Pause";
-    }
-}
-
-
-async function playAudio() {
-
-    try {
-        await audio.play();
-    } catch (error) {
-        /*
-         * Browser autoplay restrictions are intentionally respected.
-         * The user can use the visible PLAY button.
-         */
-        console.log("Playback requires user interaction.");
-    }
-}
-
-
-function togglePlay() {
-
-    if (audio.paused) {
-        playAudio();
-    } else {
-        audio.pause();
-    }
-}
-
-
-function restartAudio() {
-
-    audio.pause();
-
-    audio.currentTime = 0;
-
-    resetLyrics();
-
-    phoneTriggered = false;
-    endingTriggered = false;
-
-    phone.classList.remove("calling");
-
-    scene.classList.remove(
-        "phase-2",
-        "phase-3",
-        "phase-4",
-        "phase-5"
-    );
-
-    scene.classList.add("phase-1");
-
-    playAudio();
-}
-
-
-/* ==========================================================
-   AUDIO PROGRESS CLICK / KEYBOARD
-   ========================================================== */
-
-function seekFromPointer(event) {
-
-    if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
-        return;
-    }
-
-    const rect = progressTrack.getBoundingClientRect();
-
-    const position =
-        clamp(
-            (event.clientX - rect.left) / rect.width,
-            0,
-            1
-        );
-
-    audio.currentTime = position * audio.duration;
-}
-
-
-function seekFromKeyboard(event) {
-
-    if (!Number.isFinite(audio.duration)) {
-        return;
-    }
-
-    let percentage =
-        audio.duration > 0
-            ? audio.currentTime / audio.duration
-            : 0;
-
-    if (event.key === "ArrowRight") {
-        percentage += .05;
-    }
-
-    if (event.key === "ArrowLeft") {
-        percentage -= .05;
-    }
-
-    if (
-        event.key === "ArrowRight" ||
-        event.key === "ArrowLeft"
-    ) {
-        event.preventDefault();
-
-        audio.currentTime =
-            clamp(percentage, 0, 1) * audio.duration;
-    }
-
-    if (event.key === "Home") {
-        event.preventDefault();
-        audio.currentTime = 0;
-    }
-
-    if (event.key === "End") {
-        event.preventDefault();
-        audio.currentTime = audio.duration;
-    }
-}
-
-
-/* ==========================================================
-   INTERACTIVE MODAL SYSTEM
-   ========================================================== */
-
-function showModal(kicker, message, actions = []) {
-
-    modalKicker.textContent = kicker;
-    modalMessage.textContent = message;
-
-    modalActions.innerHTML = "";
-
-    if (!actions.length) {
-
-        const close = document.createElement("button");
-
-        close.className = "modal-button";
-        close.type = "button";
-        close.textContent = "CLOSE";
-
-        close.addEventListener("click", closeModal);
-
-        modalActions.appendChild(close);
-
-    } else {
-
-        actions.forEach(action => {
-
-            const button = document.createElement("button");
-
-            button.className = "modal-button";
-            button.type = "button";
-            button.textContent = action.label;
-
-            button.addEventListener("click", () => {
-
-                if (typeof action.onClick === "function") {
-                    action.onClick();
-                }
-            });
-
-            modalActions.appendChild(button);
+    if (index !== currentLyricIndex) {
+        currentLyricIndex = index;
+        const lines = lyricsContainer.querySelectorAll(".lyric-line");
+        lines.forEach((line, i) => {
+            line.classList.remove("active", "past");
+            if (i === index) {
+                line.classList.add("active");
+            } else if (i < index) {
+                line.classList.add("past");
+            }
         });
     }
+}
 
+function resetLyrics() {
+    currentLyricIndex = -1;
+    const lines = lyricsContainer.querySelectorAll(".lyric-line");
+    lines.forEach(line => line.classList.remove("active", "past"));
+}
+
+/* ==========================================================
+   SCENE PROGRESSION PHASES
+   ========================================================== */
+
+function updatePhases(time) {
+    scene.classList.remove("phase-1", "phase-2", "phase-3", "phase-4", "phase-5");
+
+    if (time < 30) {
+        scene.classList.add("phase-1");
+    } else if (time < 70) {
+        scene.classList.add("phase-2");
+    } else if (time < 120) {
+        scene.classList.add("phase-3");
+    } else if (time < 160) {
+        scene.classList.add("phase-4");
+    } else {
+        scene.classList.add("phase-5");
+    }
+}
+
+/* ==========================================================
+   INTERACTIVE ELEMENTS
+   ========================================================== */
+
+function openModal(kicker, text) {
+    modalKicker.textContent = kicker;
+    modalMessage.textContent = text;
     modalBackdrop.classList.add("visible");
     modalBackdrop.setAttribute("aria-hidden", "false");
+}
 
-    requestAnimationFrame(() => {
-        const firstButton =
-            modalActions.querySelector("button");
+function closeModal() {
+    modalBackdrop.classList.remove("visible");
+    modalBackdrop.setAttribute("aria-hidden", "true");
+}
 
-        if (firstButton) {
-            firstButton.focus();
+function triggerPhoneCall() {
+    phoneTriggered = true;
+    phone.classList.add("calling");
+}
+
+function triggerEnding() {
+    if (endingRunning) return;
+    endingRunning = true;
+
+    audio.pause();
+    ending.classList.add("active");
+
+    setTimeout(() => {
+        endingPhone.style.opacity = "0";
+        setTimeout(() => {
+            endingCopy.classList.add("show");
+        }, 1000);
+    }, 2500);
+}
+
+/* ==========================================================
+   EVENT HANDLERS
+   ========================================================== */
+
+openButton.addEventListener("click", () => {
+    opening.classList.add("closed");
+    experience.classList.add("visible");
+    playAudio();
+});
+
+playButton.addEventListener("click", togglePlay);
+
+restartButton.addEventListener("click", () => {
+    audio.currentTime = 0;
+    resetLyrics();
+    playAudio();
+});
+
+muteButton.addEventListener("click", toggleMute);
+volumeInput.addEventListener("input", updateVolume);
+
+progressTrack.addEventListener("click", seek);
+
+audio.addEventListener("timeupdate", updateProgress);
+audio.addEventListener("ended", () => {
+    triggerEnding();
+});
+
+audio.addEventListener("loadedmetadata", () => {
+    durationEl.textContent = formatTime(audio.duration);
+});
+
+// Window interaction
+windowEl.addEventListener("click", () => {
+    windowFocused = !windowFocused;
+    if (windowFocused) {
+        scene.classList.add("window-focus");
+        openModal("OUTSIDE", CONFIG.messages.window);
+    } else {
+        scene.classList.remove("window-focus");
+    }
+});
+
+// Tree interaction
+tree.addEventListener("click", () => {
+    openModal("CHRISTMAS TREE", CONFIG.messages.tree);
+});
+
+// Gift interaction
+gift.addEventListener("click", () => {
+    giftOpened = !giftOpened;
+    gift.classList.toggle("open", giftOpened);
+    openModal("A GIFT", CONFIG.messages.gift);
+});
+
+// Clock interaction
+clock.addEventListener("click", () => {
+    openModal("THE CLOCK", CONFIG.messages.clock);
+});
+
+// Phone interaction
+phone.addEventListener("click", () => {
+    if (phone.classList.contains("calling")) {
+        phone.classList.remove("calling");
+        openModal("PHONE CALL", CONFIG.messages.phoneAnswered);
+    } else {
+        openModal("PHONE", "23:47 — No new notifications.");
+    }
+});
+
+modalClose.addEventListener("click", () => {
+    closeModal();
+    if (windowFocused) {
+        windowFocused = false;
+        scene.classList.remove("window-focus");
+    }
+});
+
+modalBackdrop.addEventListener("click", (e) => {
+    if (e.target === modalBackdrop) {
+        closeModal();
+        if (windowFocused) {
+            windowFocused = false;
+            scene.classList.remove("window-focus");
+        }
+    }
+});
+
+fullscreenButton.addEventListener("click", toggleFullscreen);
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.warn(err));
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+}
+
+/* ==========================================================
+   SNOW & PARALLAX
+   ========================================================== */
+
+function createSnow() {
+    const snowContainer = document.getElementById("snow");
+    snowContainer.innerHTML = "";
+    const count = 38;
+
+    for (let i = 0; i < count; i++) {
+        const flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.style.left = `${Math.random() * 100}%`;
+        flake.style.opacity = Math.random() * 0.7 + 0.3;
+        flake.style.width = flake.style.height = `${Math.random() * 2 + 1}px`;
+
+        const duration = Math.random() * 5 + 6;
+        const delay = Math.random() * -10;
+        const drift = (Math.random() - 0.5) * 40;
+
+        flake.style.animationDuration = `${duration}s`;
+        flake.style.animationDelay = `${delay}s`;
+        flake.style.setProperty("--drift", `${drift}px`);
+
+        snowContainer.appendChild(flake);
+    }
+}
+
+function setupParallax() {
+    window.addEventListener("mousemove", (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    });
+
+    window.addEventListener("touchmove", (e) => {
+        if (e.touches.length > 0) {
+            mouseX = (e.touches[0].clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.touches[0].clientY / window.innerHeight - 0.5) * 2;
         }
     });
 }
 
-
-function closeModal() {
-
-    modalBackdrop.classList.remove("visible");
-    modalBackdrop.setAttribute("aria-hidden", "true");
-
-    if (typeof activeModalCloseAction === "function") {
-        const action = activeModalCloseAction;
-        activeModalCloseAction = null;
-        action();
-    }
-}
-
-
-modalClose.addEventListener("click", closeModal);
-
-
-modalBackdrop.addEventListener("click", event => {
-
-    if (event.target === modalBackdrop) {
-        closeModal();
-    }
-});
-
-
-document.addEventListener("keydown", event => {
-
-    if (
-        event.key === "Escape" &&
-        modalBackdrop.classList.contains("visible")
-    ) {
-        closeModal();
-    }
-});
-
-
-/* ==========================================================
-   INTERACTIVE OBJECTS
-   ========================================================== */
-
-// TREE
-
-function openTreeMessage() {
-
-    showModal(
-        "THE TREE",
-        CONFIG.messages.tree
-    );
-}
-
-
-tree.addEventListener("click", openTreeMessage);
-
-tree.addEventListener("keydown", event => {
-
-    if (event.key === "Enter" || event.key === " ") {
-
-        event.preventDefault();
-        openTreeMessage();
-    }
-});
-
-
-// WINDOW
-
-function focusWindow() {
-
-    if (windowFocused) {
-        return;
-    }
-
-    windowFocused = true;
-
-    scene.classList.add("window-focus");
-
-    setTimeout(() => {
-
-        showModal(
-            "OUTSIDE",
-            CONFIG.messages.window,
-            [
-                {
-                    label: "RETURN",
-                    onClick: () => {
-                        closeModal();
-
-                        setTimeout(() => {
-                            scene.classList.remove("window-focus");
-                            windowFocused = false;
-                        }, 100);
-                    }
-                }
-            ]
-        );
-
-    }, prefersReducedMotion ? 50 : 850);
-}
-
-
-windowObject.addEventListener("click", focusWindow);
-
-windowObject.addEventListener("keydown", event => {
-
-    if (event.key === "Enter" || event.key === " ") {
-
-        event.preventDefault();
-        focusWindow();
-    }
-});
-
-
-// GIFT
-
-function openGift() {
-
-    giftOpened = true;
-    gift.classList.add("open");
-
-    showModal(
-        "A SMALL THING",
-        CONFIG.messages.gift
-    );
-}
-
-
-gift.addEventListener("click", openGift);
-
-gift.addEventListener("keydown", event => {
-
-    if (event.key === "Enter" || event.key === " ") {
-
-        event.preventDefault();
-        openGift();
-    }
-});
-
-
-// CLOCK
-
-function openClock() {
-
-    showModal(
-        "DECEMBER 24",
-        CONFIG.messages.clock
-    );
-}
-
-
-clock.addEventListener("click", openClock);
-
-clock.addEventListener("keydown", event => {
-
-    if (event.key === "Enter" || event.key === " ") {
-
-        event.preventDefault();
-        openClock();
-    }
-});
-
-
-/* ==========================================================
-   PHONE INTERACTION
-   ========================================================== */
-
-function openPhone() {
-
-    if (phoneTriggered) {
-
-        showModal(
-            "PHONE",
-            CONFIG.messages.phoneIncoming,
-            [
-                {
-                    label: "DECLINE",
-                    onClick: declineCall
-                },
-                {
-                    label: "ANSWER",
-                    onClick: answerCall
-                }
-            ]
-        );
-
-        return;
-    }
-
-    showModal(
-        "PHONE",
-        "Nothing right now."
-    );
-}
-
-
-function declineCall() {
-
-    phone.classList.remove("calling");
-
-    showModal(
-        "PHONE",
-        CONFIG.messages.phoneDeclined
-    );
-
-    activeModalCloseAction = null;
-}
-
-
-function answerCall() {
-
-    phone.classList.remove("calling");
-
-    showModal(
-        "PHONE",
-        CONFIG.messages.phoneAnswered
-    );
-
-    activeModalCloseAction = null;
-}
-
-
-phone.addEventListener("click", openPhone);
-
-phone.addEventListener("keydown", event => {
-
-    if (event.key === "Enter" || event.key === " ") {
-
-        event.preventDefault();
-        openPhone();
-    }
-});
-
-
-/* ==========================================================
-   SONG PROGRESSION
-   ========================================================== */
-
-function updateSongProgress() {
-
-    if (!Number.isFinite(audio.duration) || audio.duration <= 0) {
-        return;
-    }
-
-    const progress =
-        clamp(
-            audio.currentTime / audio.duration,
-            0,
-            1
-        );
-
-    /*
-     * 0–20%
-     * Room very dark.
-     */
-    if (progress < .20) {
-
-        scene.classList.remove(
-            "phase-2",
-            "phase-3",
-            "phase-4",
-            "phase-5"
-        );
-
-        scene.classList.add("phase-1");
-    }
-
-    /*
-     * 20–45%
-     * Christmas lights become visible.
-     */
-    else if (progress < .45) {
-
-        scene.classList.remove(
-            "phase-1",
-            "phase-3",
-            "phase-4",
-            "phase-5"
-        );
-
-        scene.classList.add("phase-2");
-    }
-
-    /*
-     * 45–70%
-     * Room becomes warmer.
-     */
-    else if (progress < .70) {
-
-        scene.classList.remove(
-            "phase-1",
-            "phase-2",
-            "phase-4",
-            "phase-5"
-        );
-
-        scene.classList.add("phase-3");
-    }
-
-    /*
-     * 70–90%
-     * Room gets colder.
-     * Phone interaction becomes active.
-     */
-    else if (progress < .90) {
-
-        scene.classList.remove(
-            "phase-1",
-            "phase-2",
-            "phase-3",
-            "phase-5"
-        );
-
-        scene.classList.add("phase-4");
-    }
-
-    /*
-     * 90–100%
-     * Darkness.
-     */
-    else {
-
-        scene.classList.remove(
-            "phase-1",
-            "phase-2",
-            "phase-3",
-            "phase-4"
-        );
-
-        scene.classList.add("phase-5");
-    }
-
-
-    /* ======================================================
-       PHONE EVENT
-       ====================================================== */
-
-    if (
-        progress >= CONFIG.phoneTriggerProgress &&
-        !phoneTriggered
-    ) {
-
-        phoneTriggered = true;
-
-        phone.classList.add("calling");
-    }
-
-
-    /* ======================================================
-       ENDING EVENT
-       ====================================================== */
-
-    if (
-        progress >= CONFIG.endingTriggerProgress &&
-        !endingTriggered
-    ) {
-
-        endingTriggered = true;
-
-        beginEnding();
-    }
-}
-
-
-/* ==========================================================
-   ANIMATION LOOP
-   ========================================================== */
-
-function animationLoop(timestamp) {
-
-    if (!lastFrame) {
-        lastFrame = timestamp;
-    }
-
-    /*
-     * Keep the visual update lightweight.
-     * Audio itself remains the source of truth.
-     */
-    if (timestamp - lastFrame > 50) {
-
-        updatePlayer();
-        updateSongProgress();
-
-        lastFrame = timestamp;
-    }
+function animationLoop() {
+    targetCameraX += (mouseX * 12 - targetCameraX) * 0.05;
+    targetCameraY += (mouseY * 8 - targetCameraY) * 0.05;
+
+    camera.style.setProperty("--camera-x", `${targetCameraX}px`);
+    camera.style.setProperty("--camera-y", `${targetCameraY}px`);
 
     requestAnimationFrame(animationLoop);
 }
 
-
 /* ==========================================================
-   DESKTOP PARALLAX
-   ========================================================== */
-
-function setupParallax() {
-
-    if (prefersReducedMotion) {
-        return;
-    }
-
-    if (window.innerWidth <= 800) {
-        return;
-    }
-
-    window.addEventListener("mousemove", event => {
-
-        const x =
-            (event.clientX / window.innerWidth - .5);
-
-        const y =
-            (event.clientY / window.innerHeight - .5);
-
-        const cameraX = x * -9;
-        const cameraY = y * -6;
-
-        const windowX = x * 4;
-        const windowY = y * 3;
-
-        const treeX = x * -5;
-        const treeY = y * -3;
-
-        const deskY = y * -2;
-
-        scene.style.setProperty(
-            "--camera-x",
-            cameraX.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--camera-y",
-            cameraY.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--window-x",
-            windowX.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--window-y",
-            windowY.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--tree-x",
-            treeX.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--tree-y",
-            treeY.toFixed(2) + "px"
-        );
-
-        scene.style.setProperty(
-            "--desk-y",
-            deskY.toFixed(2) + "px"
-        );
-    });
-}
-
-
-/* ==========================================================
-   OPEN EXPERIENCE
-   ========================================================== */
-
-async function openExperience() {
-
-    opening.classList.add("closed");
-    experience.classList.add("visible");
-
-    discoveryHint.classList.remove("hidden");
-
-    setTimeout(() => {
-        discoveryHint.classList.add("hidden");
-    }, 4500);
-
-    /*
-     * OPEN is a real user gesture, so this may succeed
-     * on browsers that allow playback after interaction.
-     *
-     * If the browser rejects it, the normal PLAY button
-     * remains available.
-     */
-    try {
-        await audio.play();
-    } catch (error) {
-        // Expected on some browsers.
-    }
-
-    updatePlayButton();
-}
-
-
-const fullscreenButton = document.getElementById("fullscreenButton");
-
-function updateFullscreenButton() {
-    const active = !!document.fullscreenElement;
-    fullscreenButton.textContent = active ? "⛶" : "⛶";
-    fullscreenButton.setAttribute(
-        "aria-label",
-        active ? "Exit fullscreen" : "Enter fullscreen"
-    );
-    fullscreenButton.setAttribute(
-        "title",
-        active ? "Exit fullscreen" : "Fullscreen"
-    );
-}
-
-async function toggleFullscreen() {
-    try {
-        if (!document.fullscreenElement) {
-            await document.documentElement.requestFullscreen();
-        } else {
-            await document.exitFullscreen();
-        }
-    } catch (error) {
-        // Fullscreen may be unavailable in some embedded/mobile browsers.
-    }
-}
-
-fullscreenButton.addEventListener("click", toggleFullscreen);
-document.addEventListener("fullscreenchange", updateFullscreenButton);
-
-openButton.addEventListener("click", openExperience);
-
-
-/* ==========================================================
-   PLAYER EVENTS
-   ========================================================== */
-
-playButton.addEventListener("click", togglePlay);
-
-restartButton.addEventListener("click", restartAudio);
-
-progressTrack.addEventListener("click", seekFromPointer);
-
-progressTrack.addEventListener("keydown", seekFromKeyboard);
-
-
-volume.addEventListener("input", () => {
-
-    audio.volume = Number(volume.value);
-
-    if (audio.volume > 0) {
-        audio.muted = false;
-        muteButton.textContent = "◖";
-        muteButton.setAttribute("aria-label", "Mute");
-    }
-});
-
-
-muteButton.addEventListener("click", () => {
-
-    audio.muted = !audio.muted;
-
-    if (audio.muted) {
-        muteButton.textContent = "×";
-        muteButton.setAttribute("aria-label", "Unmute");
-    } else {
-        muteButton.textContent = "◖";
-        muteButton.setAttribute("aria-label", "Mute");
-    }
-});
-
-
-audio.addEventListener("loadedmetadata", () => {
-
-    durationElement.textContent =
-        formatTime(audio.duration);
-
-    updatePlayer();
-});
-
-
-audio.addEventListener("timeupdate", () => {
-
-    updatePlayer();
-    updateSongProgress();
-});
-
-
-audio.addEventListener("play", updatePlayButton);
-
-audio.addEventListener("pause", updatePlayButton);
-
-
-/* ==========================================================
-   AUDIO END
-   ========================================================== */
-
-audio.addEventListener("ended", () => {
-
-    if (!endingTriggered) {
-        endingTriggered = true;
-        beginEnding();
-    }
-});
-
-
-/* ==========================================================
-   ENDING
-   ========================================================== */
-
-function beginEnding() {
-
-    if (endingRunning) {
-        return;
-    }
-
-    endingRunning = true;
-
-    /*
-     * Stop normal interaction.
-     */
-    phone.classList.remove("calling");
-
-    document.body.style.cursor = "default";
-
-    /*
-     * Make room disappear.
-     */
-    scene.classList.add("phase-5");
-
-    /*
-     * Stop the music at the end of the experience.
-     */
-    audio.pause();
-
-    /*
-     * Fade out player and lyrics.
-     */
-    document.querySelector(".player").style.transition =
-        "opacity 1.5s ease";
-
-    document.querySelector(".player").style.opacity = "0";
-
-    lyricsContainer.style.transition =
-        "opacity 1.2s ease";
-
-    lyricsContainer.style.opacity = "0";
-
-    /*
-     * Fade the scene.
-     */
-    setTimeout(() => {
-
-        ending.classList.add("active");
-
-    }, prefersReducedMotion ? 200 : 1100);
-
-
-    /*
-     * Phone lights up.
-     */
-    endingPhone.style.opacity = "1";
-
-
-    /*
-     * After a quiet moment, phone disappears.
-     */
-    setTimeout(() => {
-
-        endingPhone.style.opacity = "0";
-
-    }, prefersReducedMotion ? 500 : 2200);
-
-
-    /*
-     * Final message.
-     */
-    setTimeout(() => {
-
-        endingCopy.classList.add("show");
-
-        replayButton.focus();
-
-    }, prefersReducedMotion ? 800 : 3700);
-}
-
-
-/* ==========================================================
-   REPLAY
+   REPLAY EXPERIENCE
    ========================================================== */
 
 function replayExperience() {
-
     ending.classList.remove("active");
     endingCopy.classList.remove("show");
-
     endingPhone.style.opacity = "1";
 
     audio.pause();
     audio.currentTime = 0;
 
     currentLyricIndex = -1;
-
     phoneTriggered = false;
     endingTriggered = false;
     endingRunning = false;
@@ -3198,132 +2436,30 @@ function replayExperience() {
     windowFocused = false;
 
     phone.classList.remove("calling");
-
     gift.classList.remove("open");
 
-    scene.classList.remove(
-        "phase-2",
-        "phase-3",
-        "phase-4",
-        "phase-5",
-        "window-focus"
-    );
-
+    scene.classList.remove("window-focus", "phase-2", "phase-3", "phase-4", "phase-5");
     scene.classList.add("phase-1");
 
-    lyricsContainer.style.opacity = "1";
-
-    document.querySelector(".player").style.opacity = "1";
-
     resetLyrics();
-    updatePlayer();
-
-    /*
-     * Give the new scene a moment before attempting playback.
-     * The replay button itself is a user gesture.
-     */
-    setTimeout(() => {
-        playAudio();
-    }, prefersReducedMotion ? 0 : 500);
+    playAudio();
 }
 
-
 replayButton.addEventListener("click", replayExperience);
-
-
-/* ==========================================================
-   TOUCH / MOBILE DISCOVERY
-   ========================================================== */
-
-let touchStartX = 0;
-let touchStartY = 0;
-
-document.addEventListener("touchstart", event => {
-
-    if (!event.touches.length) {
-        return;
-    }
-
-    touchStartX = event.touches[0].clientX;
-    touchStartY = event.touches[0].clientY;
-
-}, { passive: true });
-
-
-document.addEventListener("touchmove", event => {
-
-    /*
-     * Prevent accidental horizontal page movement.
-     * The document is already overflow-hidden, but this keeps
-     * the scene stable on mobile browsers.
-     */
-    if (!event.touches.length) {
-        return;
-    }
-
-    const dx =
-        Math.abs(event.touches[0].clientX - touchStartX);
-
-    const dy =
-        Math.abs(event.touches[0].clientY - touchStartY);
-
-    if (dx > dy && dx > 10) {
-        event.preventDefault();
-    }
-
-}, { passive: false });
-
 
 /* ==========================================================
    INITIALIZATION
    ========================================================== */
 
-function initialize() {
-
-    /*
-     * Make sure the required local audio path is explicit.
-     */
-    audio.setAttribute("src", CONFIG.audioFile);
-
+function init() {
     createSnow();
-
     buildLyrics();
-
-    updatePlayButton();
-
-    updatePlayer();
-
     setupParallax();
-
-    /*
-     * Hide hint after a few seconds even if user does nothing.
-     */
-    setTimeout(() => {
-        discoveryHint.classList.add("hidden");
-    }, 5000);
+    requestAnimationFrame(animationLoop);
 }
 
-
-window.addEventListener("resize", () => {
-
-    if (window.innerWidth <= 800) {
-        scene.style.setProperty("--camera-x", "0px");
-        scene.style.setProperty("--camera-y", "0px");
-    }
-
-    createSnow();
-});
-
-
-/* ==========================================================
-   START
-   ========================================================== */
-
-initialize();
-
-requestAnimationFrame(animationLoop);
-
+window.addEventListener("DOMContentLoaded", init);
+window.addEventListener("resize", createSnow);
 </script>
-
 </body>
 </html>
