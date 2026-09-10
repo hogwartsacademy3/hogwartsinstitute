@@ -1694,6 +1694,75 @@ input:focus-visible,
         animation: none !important;
     }
 }
+
+/* =========================================================
+   INTERACTION ENHANCEMENTS
+   ========================================================= */
+.phone-call-state { left:4px; right:4px; font-size:5.2px; line-height:1.25; }
+.phone-call-state strong { font-size:6px; letter-spacing:.045em; white-space:nowrap; width:100%; box-sizing:border-box; }
+.incoming-icon { font-size:17px; }
+.call-actions { display:none; }
+.phone.calling { cursor:pointer; }
+.phone.calling .phone-screen { animation: incomingGlow 1.1s ease-in-out infinite alternate; }
+@keyframes incomingGlow { from { filter:brightness(.9); } to { filter:brightness(1.35); } }
+
+.tree.lit-up .tree-light { animation-duration:1.1s; box-shadow:0 0 15px rgba(224,183,104,.95); }
+.tree.shaken { animation:treeShake .55s ease; }
+@keyframes treeShake { 0%,100%{transform:translate3d(var(--tree-x,0px),var(--tree-y,0px),0) rotate(0)} 25%{transform:translate3d(var(--tree-x,0px),var(--tree-y,0px),0) rotate(-1.5deg)} 75%{transform:translate3d(var(--tree-x,0px),var(--tree-y,0px),0) rotate(1.5deg)} }
+
+.window.snowing .snow { opacity:1; }
+.window.snowing .window-sky { filter:brightness(1.08); }
+
+.gift.open .gift-body::after { content:"✦"; position:absolute; inset:0; display:grid; place-items:center; color:#e8d09b; font-size:24px; text-shadow:0 0 18px rgba(220,180,100,.8); animation:giftGlow 1.2s ease-in-out infinite alternate; }
+.gift-body { position:absolute; }
+@keyframes giftGlow { from{opacity:.45;transform:scale(.8)} to{opacity:1;transform:scale(1.1)} }
+
+.clock.ticking .clock-hand.minute { animation:clockTick 1.2s steps(1) 4; }
+@keyframes clockTick { to { transform:translateX(-50%) rotate(352deg); } }
+
+.cup.steaming .steam { opacity:.35; }
+
+.modal-actions.call-choice { gap:18px; margin-top:26px; }
+.call-choice .modal-button { min-width:92px; padding:11px 10px; border:1px solid rgba(213,183,135,.2); }
+.call-choice .modal-button.answer { border-color:rgba(120,151,121,.38); }
+.call-choice .modal-button.decline { border-color:rgba(150,88,80,.32); }
+.call-choice .modal-button:hover { transform:translateY(-2px); }
+
+.interactive { transition:filter .35s ease, transform .45s var(--ease-cinematic); }
+.interactive:active { filter:brightness(1.18); }
+
+
+.phone.call-answered .phone-screen {
+    background:radial-gradient(circle at 50% 38%, rgba(113,150,117,.2), transparent 46%), #0c110d;
+}
+.phone.call-answered .phone-call-state::after {
+    content:"CONNECTED\A 00:00";
+    white-space:pre;
+    display:block;
+    margin-top:12px;
+    color:#9bb39a;
+    font-size:5px;
+    line-height:1.7;
+}
+.phone.call-declined .phone-screen {
+    background:radial-gradient(circle at 50% 38%, rgba(150,108,82,.12), transparent 46%), #0d0b0a;
+}
+.phone.call-declined .phone-call-state::after {
+    content:"CALL ENDED";
+    display:block;
+    margin-top:12px;
+    color:#9b8a78;
+    font-size:5px;
+    letter-spacing:.12em;
+}
+.call-choice .modal-button { min-width:120px; }
+.call-choice .decline { border-color:rgba(126,82,73,.75); }
+.call-choice .answer { border-color:rgba(129,156,112,.8); }
+.window.window-focus { filter:brightness(1.08); }
+.tree.lit-up { filter:brightness(1.14) drop-shadow(0 0 18px rgba(215,176,103,.18)); }
+.gift.open { filter:brightness(1.12) drop-shadow(0 0 14px rgba(215,176,103,.2)); }
+.clock.ticking { filter:brightness(1.14); }
+.cup.steaming { transform:translateY(-5px) rotate(-2deg) scale(1.03); }
 </style>
 </head>
 
@@ -2136,7 +2205,8 @@ const volumeInput = document.getElementById("volume");
 const modalBackdrop = document.getElementById("modalBackdrop");
 const modalKicker = document.getElementById("modalKicker");
 const modalMessage = document.getElementById("modalMessage");
-const modalClose = document.getElementById("modalClose");
+const modalActions = document.getElementById("modalActions");
+let modalClose = document.getElementById("modalClose");
 
 const ending = document.getElementById("ending");
 const endingPhone = document.getElementById("endingPhone");
@@ -2150,6 +2220,8 @@ let endingTriggered = false;
 let endingRunning = false;
 let giftOpened = false;
 let windowFocused = false;
+let musicStarted = false;
+let callResolved = false;
 
 let mouseX = 0;
 let mouseY = 0;
@@ -2187,6 +2259,12 @@ function updateProgress() {
     if (cur >= 158 && !phoneTriggered && !endingTriggered) {
         triggerPhoneCall();
     }
+}
+
+function startExperienceMusic() {
+    if (musicStarted) return;
+    musicStarted = true;
+    playAudio();
 }
 
 function playAudio() {
@@ -2315,8 +2393,10 @@ function closeModal() {
 
 function triggerPhoneCall() {
     phoneTriggered = true;
+    callResolved = false;
+    phone.classList.remove("call-answered", "call-declined");
     phone.classList.add("calling");
-    phone.setAttribute("aria-label", "Answer the incoming call");
+    phone.setAttribute("aria-label", "Incoming call from unknown caller");
 }
 
 function triggerEnding() {
@@ -2341,7 +2421,7 @@ function triggerEnding() {
 openButton.addEventListener("click", () => {
     opening.classList.add("closed");
     experience.classList.add("visible");
-    playAudio();
+    // Opening reveals the room; the soundtrack starts with the first meaningful interaction.
 });
 
 playButton.addEventListener("click", togglePlay);
@@ -2368,10 +2448,12 @@ audio.addEventListener("loadedmetadata", () => {
 
 // Window interaction
 windowEl.addEventListener("click", () => {
+    startExperienceMusic();
     windowFocused = !windowFocused;
+    windowEl.classList.toggle("snowing", windowFocused);
     if (windowFocused) {
         scene.classList.add("window-focus");
-        openModal("OUTSIDE", CONFIG.messages.window);
+        openModal("OUTSIDE", "The snow suddenly looks heavier through the glass.\n\nA distant window turns off. Somewhere outside, a car passes through the empty street.");
     } else {
         scene.classList.remove("window-focus");
     }
@@ -2379,36 +2461,87 @@ windowEl.addEventListener("click", () => {
 
 // Tree interaction
 tree.addEventListener("click", () => {
-    openModal("CHRISTMAS TREE", CONFIG.messages.tree);
+    startExperienceMusic();
+    tree.classList.add("lit-up", "shaken");
+    setTimeout(() => tree.classList.remove("shaken"), 600);
+    openModal("CHRISTMAS TREE", "The lights suddenly glow brighter.\n\nOne little bulb flickers three times. Another answers from the other side of the tree.\n\nFor a few seconds, the room feels almost occupied.");
 });
 
 // Gift interaction
 gift.addEventListener("click", () => {
+    startExperienceMusic();
     giftOpened = !giftOpened;
     gift.classList.toggle("open", giftOpened);
-    openModal("A GIFT", CONFIG.messages.gift);
+    openModal("A GIFT", giftOpened ? "The ribbon loosens and the lid lifts slightly.\n\nInside is a tiny handwritten card. The ink is faded, but one sentence is still readable:\n\nSome things are meant to be opened only when you are ready." : "You turn the gift over.\n\nIt is heavier than it looks. The ribbon trembles when you touch it.\n\nOpen it, or leave it for another Christmas?");
 });
 
 // Clock interaction
 clock.addEventListener("click", () => {
-    openModal("THE CLOCK", CONFIG.messages.clock);
+    startExperienceMusic();
+    clock.classList.add("ticking");
+    setTimeout(() => clock.classList.remove("ticking"), 5000);
+    openModal("THE CLOCK", "23:47\n\nThe second hand moves one tick.\nThen another.\n\nIt feels strangely loud in the quiet room.\nChristmas Eve is almost over.");
 });
 
 // Phone interaction
 phone.addEventListener("click", () => {
+    startExperienceMusic();
     if (phone.classList.contains("calling")) {
-        phone.classList.remove("calling");
-        phone.setAttribute("aria-label", "Check the phone");
-        openModal("PHONE CALL", CONFIG.messages.phoneAnswered);
+        showCallChoice();
+    } else if (phone.classList.contains("call-answered")) {
+        openModal("THE CALL", "The line is still open.\n\nNo voice. No explanation. Just the faint sound of breathing before the connection disappears.");
+    } else if (phone.classList.contains("call-declined")) {
+        openModal("MISSED CALL", "You chose not to answer.\n\nThe phone stays quiet now, but the feeling of being called remains in the room.");
     } else {
         openModal("PHONE", "23:47\n\nNo new notifications.\nThe screen goes dark again.");
     }
 });
 
+function showCallChoice() {
+    modalKicker.textContent = "INCOMING CALL";
+    modalMessage.textContent = "UNKNOWN\n\nThe phone keeps ringing.\nYou have two choices.";
+    modalActions.className = "modal-actions call-choice";
+    modalActions.innerHTML = `
+        <button id="declineCall" class="modal-button decline" type="button">DECLINE</button>
+        <button id="answerCall" class="modal-button answer" type="button">ANSWER</button>
+    `;
+    modalBackdrop.classList.add("visible");
+    modalBackdrop.setAttribute("aria-hidden", "false");
+    document.getElementById("declineCall").addEventListener("click", declineCall, {once:true});
+    document.getElementById("answerCall").addEventListener("click", answerCall, {once:true});
+}
+
+function restoreModalClose() {
+    modalActions.className = "modal-actions";
+    modalActions.innerHTML = `<button id="modalClose" class="modal-button" type="button">CLOSE</button>`;
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+}
+
+function declineCall() {
+    callResolved = true;
+    phone.classList.remove("calling", "call-answered");
+    phone.classList.add("call-declined");
+    phone.setAttribute("aria-label", "View the missed call");
+    modalKicker.textContent = "CALL DECLINED";
+    modalMessage.textContent = "You let it ring.\n\nThe sound stops.\nFor a moment, the room feels lighter. Then the screen goes dark, leaving only one missed call behind.";
+    restoreModalClose();
+}
+
+function answerCall() {
+    callResolved = true;
+    phone.classList.remove("calling", "call-declined");
+    phone.classList.add("call-answered");
+    phone.setAttribute("aria-label", "View the answered call");
+    modalKicker.textContent = "CALL ANSWERED";
+    modalMessage.textContent = "You pick up.\n\nFor a few seconds, nobody says anything.\nThen a quiet breath comes through the speaker.\nThe line disconnects before you can speak.";
+    restoreModalClose();
+}
+
 // Cup interaction
 cup.addEventListener("click", () => {
+    startExperienceMusic();
     cup.classList.add("steaming");
-    openModal("CHRISTMAS EVE", "The drink is still warm.\n\nOutside, snow keeps falling. Inside, the room refuses to feel completely cold.");
+    openModal("CHRISTMAS EVE", "You wrap your hands around the cup.\n\nThe steam curls toward the window before disappearing.\nThe drink is still warm.\n\nYou take one sip. The room feels a little less empty.");
     setTimeout(() => cup.classList.remove("steaming"), 1200);
 });
 
@@ -2522,6 +2655,8 @@ function replayExperience() {
     endingRunning = false;
     giftOpened = false;
     windowFocused = false;
+    windowEl.classList.remove("snowing");
+    tree.classList.remove("lit-up", "shaken");
 
     phone.classList.remove("calling");
     phone.setAttribute("aria-label", "Check the phone");
